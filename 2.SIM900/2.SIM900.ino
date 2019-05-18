@@ -1,5 +1,5 @@
 #include <SoftwareSerial.h>
-SoftwareSerial mySerial(9, 10);
+SoftwareSerial mySerial(9, 10); //9 to 5VT and 10 to 5VR
 
 void setup()
 {
@@ -43,13 +43,6 @@ void loop()
  void RecieveMessage()
 { String x = "AT+CNMI=2,2,0,0,0";
   mySerial.println(x);
-
-if (mySerial.find("Hi"))
-
-  {mySerial.println("found");}
-   if (mySerial.find("Bye"))
-  {mySerial.println("not");}
-  //mySerial.println("AT+CNMI=2,2,0,0,0"); // AT Command to receive a live SMS
   delay(1000);
  }
  
