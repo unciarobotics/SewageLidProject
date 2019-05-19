@@ -12,7 +12,7 @@ MedianFilter filter(31,0);
 
 void setup() {
   
-  Serial.begin(115200); 
+  Serial.begin(9600); 
 
   
   
@@ -27,6 +27,6 @@ void loop() {
   o = (o / US_ROUNDTRIP_CM);
   Serial.print(o); 
   Serial.println("cm");
-
+ 
   
 }

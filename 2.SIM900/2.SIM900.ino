@@ -1,5 +1,5 @@
 #include <SoftwareSerial.h>
-SoftwareSerial mySerial(9, 10); //10 to 5VT and 9 to 5VR
+SoftwareSerial mySerial(6, 7); //10 to 5VT and 9 to 5VR
 
 void setup()
 {
