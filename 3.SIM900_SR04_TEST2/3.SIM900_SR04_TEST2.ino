@@ -1,3 +1,5 @@
+#include <EEPROM.h>
+
 #include <SoftwareSerial.h>
 SoftwareSerial mySerial(7, 6); //10 to 5VT and 9 to 5VR
 
@@ -5,11 +7,12 @@ SoftwareSerial mySerial(7, 6); //10 to 5VT and 9 to 5VR
 #define echoPin 10
 int ctr=0;
 int duration, distance;
+String ph = "7018093520";
 void setup()
-{
+{ 
   mySerial.begin(9600); // Setting the baud rate of GSM Module
   Serial.begin(9600);  // Setting the baud rate of Serial Monitor (Arduino)
-   pinMode(trigPin,OUTPUT);
+  pinMode(trigPin,OUTPUT);
   pinMode(echoPin,INPUT);
   pinMode(8,OUTPUT);
   pinMode(11,OUTPUT);
@@ -36,22 +39,24 @@ void loop()
  if (distance<20&&ctr<=30)
  {ctr++;}
  if (distance<20&&ctr<30)
- {SendMessage();
+ {delay(100);
+  if (distance<20&&ctr<30)
+  {SendMessage();
   ctr=0;
-  delay(10000);
+  delay(10000);}
   }
 if (button==HIGH)
  {delay(100);
-  SendMessageb();
+ if (button==HIGH)
+ {
+  SendMessageb();}
   }
 
  if(GasSensor>=600)
+ {delay(100);
+ if(GasSensor>=600)
  {SendMessagec();
-  while(GasSensor>550)
-  {
-  GasSensor = analogRead(A6);
-  Serial.println(GasSensor);
-  delay(100);}
+  delay(10000);}
   }
  
  if (mySerial.available()>0)
@@ -60,10 +65,11 @@ if (button==HIGH)
 
 
  void SendMessage()
-{
+{ 
+  String phoneNumber= String("AT+CMGS=\"+91"+ph+"\"\r");
   mySerial.println("AT+CMGF=1");  //Sets the GSM Module in Text Mode
   delay(1000);  // Delay of 1000 milli seconds or 1 second
-  mySerial.println("AT+CMGS=\"+917018093520\"\r"); // Replace x with mobile number
+  mySerial.println(phoneNumber); // Replace x with mobile number
   delay(1000);
   mySerial.println("Warning! Water over detected. Water Level is below 30 cm");// The SMS text you want to send
   delay(100);
